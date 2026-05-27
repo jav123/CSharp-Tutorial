@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 8: Ejercicios Prácticos | Curso de C#</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 8: Ejercicios Prácticos</h1>
+        <p>Proyectos para poner en práctica todo lo aprendido</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon">💻</span>
+                <span>Curso C#</span>
+            </a>
+            <button class="nav-toggle" aria-label="Menú" onclick="this.classList.toggle('active'); document.querySelector('nav ul').classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">🏠 Inicio</a></li>
+                <li><a href="modulo-01.html">📖 Introducción</a></li>
+                <li><a href="modulo-02.html">🔢 Fundamentos</a></li>
+                <li><a href="modulo-03.html">🔀 Control</a></li>
+                <li><a href="modulo-04.html">⚙️ Funciones</a></li>
+                <li><a href="modulo-05.html">🏗️ POO</a></li>
+                <li><a href="modulo-06.html">📦 Colecciones</a></li>
+                <li><a href="modulo-07.html">⚠️ Excepciones</a></li>
+                <li><a href="modulo-08.html" class="active">💻 Ejercicios</a></li>
+                <li><a href="about.html">👨‍💻 Autor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2>📋 Índice de Ejercicios</h2>
+            <table>
+                <thead><tr><th>Nivel</th><th>Ejercicio</th><th>Conceptos</th></tr></thead>
+                <tbody>
+                    <tr><td>🟢 Básico</td><td>Calculadora</td><td>Variables, operadores</td></tr>
+                    <tr><td>🟢 Básico</td><td>Conversor de Temperaturas</td><td>Funciones, condicionales</td></tr>
+                    <tr><td>🟡 Intermedio</td><td>Juego de Adivinanza</td><td>Bucles, random</td></tr>
+                    <tr><td>🟡 Intermedio</td><td>Gestor de Tareas</td><td>Listas, clases</td></tr>
+                    <tr><td>🔴 Avanzado</td><td>Sistema de Inventario</td><td>POO, LINQ</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h2>🟢 Ejercicio 1: Calculadora Completa</h2>
+            <pre><code><span class="keyword">using</span> System;
+
+<span class="keyword">class</span> <span class="class-name">Calculadora</span>
+{
+    <span class="keyword">static void</span> <span class="method">Main</span>()
+    {
+        <span class="keyword">bool</span> continuar = <span class="keyword">true</span>;
+        
+        <span class="keyword">while</span> (continuar)
+        {
+            Console.<span class="method">WriteLine</span>(<span class="string">"╔═══════════════════════════════╗"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"║     CALCULADORA               ║"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"╠═══════════════════════════════╣"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"║  1. Suma                      ║"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"║  2. Resta                     ║"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"║  3. Multiplicación            ║"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"║  4. División                  ║"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"║  0. Salir                     ║"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"╚═══════════════════════════════╝"</span>);
+            
+            Console.<span class="method">Write</span>(<span class="string">"Opción: "</span>);
+            <span class="keyword">string</span> opcion = Console.<span class="method">ReadLine</span>();
+            
+            <span class="keyword">if</span> (opcion == <span class="string">"0"</span>) { continuar = <span class="keyword">false</span>; <span class="keyword">continue</span>; }
+            
+            Console.<span class="method">Write</span>(<span class="string">"Primer número: "</span>);
+            <span class="keyword">double</span> a = <span class="keyword">double</span>.<span class="method">Parse</span>(Console.<span class="method">ReadLine</span>());
+            
+            Console.<span class="method">Write</span>(<span class="string">"Segundo número: "</span>);
+            <span class="keyword">double</span> b = <span class="keyword">double</span>.<span class="method">Parse</span>(Console.<span class="method">ReadLine</span>());
+            
+            <span class="keyword">double</span> resultado = opcion <span class="keyword">switch</span>
+            {
+                <span class="string">"1"</span> => a + b,
+                <span class="string">"2"</span> => a - b,
+                <span class="string">"3"</span> => a * b,
+                <span class="string">"4"</span> => b != <span class="number">0</span> ? a / b : <span class="number">0</span>,
+                _ => <span class="number">0</span>
+            };
+            
+            Console.<span class="method">WriteLine</span>(<span class="string">$"\nResultado: {resultado}\n"</span>);
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🟡 Ejercicio 2: Juego de Adivinanza</h2>
+            <pre><code><span class="keyword">using</span> System;
+
+<span class="keyword">class</span> <span class="class-name">JuegoAdivinanza</span>
+{
+    <span class="keyword">static void</span> <span class="method">Main</span>()
+    {
+        Random random = <span class="keyword">new</span> Random();
+        <span class="keyword">int</span> numeroSecreto = random.<span class="method">Next</span>(<span class="number">1</span>, <span class="number">101</span>);
+        <span class="keyword">int</span> intentos = <span class="number">0</span>;
+        <span class="keyword">int</span> maxIntentos = <span class="number">7</span>;
+        <span class="keyword">bool</span> adivinado = <span class="keyword">false</span>;
+        
+        Console.<span class="method">WriteLine</span>(<span class="string">"🎮 Adivina el número (1-100)"</span>);
+        Console.<span class="method">WriteLine</span>(<span class="string">$"Tienes {maxIntentos} intentos.\n"</span>);
+        
+        <span class="keyword">while</span> (intentos < maxIntentos && !adivinado)
+        {
+            Console.<span class="method">Write</span>(<span class="string">$"Intento {intentos + <span class="number">1</span>}: "</span>);
+            
+            <span class="keyword">if</span> (!<span class="keyword">int</span>.<span class="method">TryParse</span>(Console.<span class="method">ReadLine</span>(), <span class="keyword">out int</span> intento))
+            {
+                Console.<span class="method">WriteLine</span>(<span class="string">"Ingresa un número válido.\n"</span>);
+                <span class="keyword">continue</span>;
+            }
+            
+            intentos++;
+            
+            <span class="keyword">if</span> (intento == numeroSecreto)
+            {
+                adivinado = <span class="keyword">true</span>;
+                Console.<span class="method">WriteLine</span>(<span class="string">$"\n🎉 ¡CORRECTO! Lo lograste en {intentos} intentos."</span>);
+            }
+            <span class="keyword">else if</span> (intento < numeroSecreto)
+            {
+                Console.<span class="method">WriteLine</span>(<span class="string">"📈 El número es MAYOR.\n"</span>);
+            }
+            <span class="keyword">else</span>
+            {
+                Console.<span class="method">WriteLine</span>(<span class="string">"📉 El número es MENOR.\n"</span>);
+            }
+        }
+        
+        <span class="keyword">if</span> (!adivinado)
+        {
+            Console.<span class="method">WriteLine</span>(<span class="string">$"\n😢 Se acabaron los intentos. Era: {numeroSecreto}"</span>);
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🟡 Ejercicio 3: Gestor de Tareas</h2>
+            <pre><code><span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Collections.Generic;
+
+<span class="keyword">class</span> <span class="class-name">Tarea</span>
+{
+    <span class="keyword">public int</span> Id { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> Titulo { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public bool</span> Completada { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="keyword">class</span> <span class="class-name">GestorTareas</span>
+{
+    <span class="keyword">static</span> List<<span class="class-name">Tarea</span>> tareas = <span class="keyword">new</span> List<<span class="class-name">Tarea</span>>();
+    <span class="keyword">static int</span> contadorId = <span class="number">0</span>;
+    
+    <span class="keyword">static void</span> <span class="method">Main</span>()
+    {
+        <span class="keyword">bool</span> continuar = <span class="keyword">true</span>;
+        
+        <span class="keyword">while</span> (continuar)
+        {
+            Console.<span class="method">WriteLine</span>(<span class="string">"\n═══ GESTOR DE TAREAS ═══"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"1. Ver tareas"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"2. Agregar tarea"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"3. Completar tarea"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"4. Eliminar tarea"</span>);
+            Console.<span class="method">WriteLine</span>(<span class="string">"0. Salir"</span>);
+            Console.<span class="method">Write</span>(<span class="string">"Opción: "</span>);
+            
+            <span class="keyword">switch</span> (Console.<span class="method">ReadLine</span>())
+            {
+                <span class="keyword">case</span> <span class="string">"1"</span>: <span class="method">VerTareas</span>(); <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"2"</span>: <span class="method">AgregarTarea</span>(); <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"3"</span>: <span class="method">CompletarTarea</span>(); <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"4"</span>: <span class="method">EliminarTarea</span>(); <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"0"</span>: continuar = <span class="keyword">false</span>; <span class="keyword">break</span>;
+            }
+        }
+    }
+    
+    <span class="keyword">static void</span> <span class="method">VerTareas</span>()
+    {
+        <span class="keyword">if</span> (tareas.Count == <span class="number">0</span>)
+        {
+            Console.<span class="method">WriteLine</span>(<span class="string">"No hay tareas."</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> t <span class="keyword">in</span> tareas)
+        {
+            <span class="keyword">string</span> estado = t.Completada ? <span class="string">"✅"</span> : <span class="string">"⏳"</span>;
+            Console.<span class="method">WriteLine</span>(<span class="string">$"{estado} [{t.Id}] {t.Titulo}"</span>);
+        }
+    }
+    
+    <span class="keyword">static void</span> <span class="method">AgregarTarea</span>()
+    {
+        Console.<span class="method">Write</span>(<span class="string">"Título: "</span>);
+        <span class="keyword">string</span> titulo = Console.<span class="method">ReadLine</span>();
+        
+        tareas.<span class="method">Add</span>(<span class="keyword">new</span> <span class="class-name">Tarea</span> 
+        { 
+            Id = ++contadorId, 
+            Titulo = titulo, 
+            Completada = <span class="keyword">false</span> 
+        });
+        
+        Console.<span class="method">WriteLine</span>(<span class="string">"✓ Tarea agregada."</span>);
+    }
+    
+    <span class="keyword">static void</span> <span class="method">CompletarTarea</span>()
+    {
+        Console.<span class="method">Write</span>(<span class="string">"ID de la tarea: "</span>);
+        <span class="keyword">if</span> (<span class="keyword">int</span>.<span class="method">TryParse</span>(Console.<span class="method">ReadLine</span>(), <span class="keyword">out int</span> id))
+        {
+            <span class="keyword">var</span> tarea = tareas.<span class="method">Find</span>(t => t.Id == id);
+            <span class="keyword">if</span> (tarea != <span class="keyword">null</span>)
+            {
+                tarea.Completada = <span class="keyword">true</span>;
+                Console.<span class="method">WriteLine</span>(<span class="string">"✓ Tarea completada."</span>);
+            }
+        }
+    }
+    
+    <span class="keyword">static void</span> <span class="method">EliminarTarea</span>()
+    {
+        Console.<span class="method">Write</span>(<span class="string">"ID de la tarea: "</span>);
+        <span class="keyword">if</span> (<span class="keyword">int</span>.<span class="method">TryParse</span>(Console.<span class="method">ReadLine</span>(), <span class="keyword">out int</span> id))
+        {
+            tareas.<span class="method">RemoveAll</span>(t => t.Id == id);
+            Console.<span class="method">WriteLine</span>(<span class="string">"✓ Tarea eliminada."</span>);
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🎓 Consejos Finales</h2>
+            <ul>
+                <li><strong>Practica diariamente</strong> - La programación se aprende haciendo</li>
+                <li><strong>Lee código de otros</strong> - Aprende de proyectos open source</li>
+                <li><strong>No copies, escribe</strong> - Escribir te ayuda a memorizar</li>
+                <li><strong>Depura paso a paso</strong> - Usa el debugger para entender el flujo</li>
+                <li><strong>Pide ayuda</strong> - La comunidad de C# es muy activa</li>
+            </ul>
+
+            <div class="note note-success">
+                <h3>🎉 ¡Felicidades!</h3>
+                <p>Has completado el curso de C# para principiantes. Ahora tienes las bases para crear aplicaciones de consola, entender POO, trabajar con colecciones y manejar errores de forma profesional.</p>
+                <p><strong>¡Sigue practicando y nunca dejes de aprender!</strong></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>📚 Recursos Adicionales</h2>
+            <ul>
+                <li><a href="https://docs.microsoft.com/es-es/dotnet/csharp/" target="_blank">Documentación oficial de C#</a></li>
+                <li><a href="https://www.w3schools.com/cs/" target="_blank">C# Tutorial - W3Schools</a></li>
+                <li><a href="https://docs.microsoft.com/es-es/learn/paths/csharp-first-steps/" target="_blank">Microsoft Learn - C#</a></li>
+            </ul>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <a href="modulo-07.html" class="btn btn-secondary">← Anterior: Excepciones</a>
+            <a href="index.html" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Curso de C# para Principiantes | Módulo 8: Ejercicios Prácticos</p>
+    </footer>
+</body>
+</html>

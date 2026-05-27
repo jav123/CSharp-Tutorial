@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5: POO Básico | Curso de C#</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 5: Programación Orientada a Objetos</h1>
+        <p>Clases, Objetos y Encapsulamiento</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon">💻</span>
+                <span>Curso C#</span>
+            </a>
+            <button class="nav-toggle" aria-label="Menú" onclick="this.classList.toggle('active'); document.querySelector('nav ul').classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">🏠 Inicio</a></li>
+                <li><a href="modulo-01.html">📖 Introducción</a></li>
+                <li><a href="modulo-02.html">🔢 Fundamentos</a></li>
+                <li><a href="modulo-03.html">🔀 Control</a></li>
+                <li><a href="modulo-04.html">⚙️ Funciones</a></li>
+                <li><a href="modulo-05.html" class="active">🏗️ POO</a></li>
+                <li><a href="modulo-06.html">📦 Colecciones</a></li>
+                <li><a href="modulo-07.html">⚠️ Excepciones</a></li>
+                <li><a href="modulo-08.html">💻 Ejercicios</a></li>
+                <li><a href="about.html">👨‍💻 Autor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2>🎯 Objetivos de este módulo</h2>
+            <ul>
+                <li>Entender los conceptos fundamentales de POO</li>
+                <li>Crear clases y objetos</li>
+                <li>Aplicar encapsulamiento con propiedades</li>
+                <li>Comprender herencia y polimorfismo</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <h2>📖 ¿Qué es la POO?</h2>
+            <p>La <strong>Programación Orientada a Objetos</strong> organiza el código en "objetos" que representan cosas del mundo real.</p>
+
+            <table>
+                <thead><tr><th>Concepto</th><th>En un Auto</th><th>En Código</th></tr></thead>
+                <tbody>
+                    <tr><td>Clase</td><td>Plano/Diseño</td><td><code>class Auto { }</code></td></tr>
+                    <tr><td>Objeto</td><td>Un auto específico</td><td><code>new Auto()</code></td></tr>
+                    <tr><td>Atributos</td><td>Color, marca</td><td><code>string color;</code></td></tr>
+                    <tr><td>Métodos</td><td>Arrancar, frenar</td><td><code>void Arrancar()</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Tu Primera Clase</h2>
+            <pre><code><span class="comment">// Definición de la clase</span>
+<span class="keyword">class</span> <span class="class-name">Persona</span>
+{
+    <span class="comment">// Atributos (campos)</span>
+    <span class="keyword">public string</span> nombre;
+    <span class="keyword">public int</span> edad;
+    
+    <span class="comment">// Método</span>
+    <span class="keyword">public void</span> <span class="method">Presentarse</span>()
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"Hola, soy {nombre} y tengo {edad} años."</span>);
+    }
+}
+
+<span class="comment">// Crear y usar objetos</span>
+<span class="class-name">Persona</span> persona1 = <span class="keyword">new</span> <span class="class-name">Persona</span>();
+persona1.nombre = <span class="string">"Ana"</span>;
+persona1.edad = <span class="number">25</span>;
+persona1.<span class="method">Presentarse</span>();  <span class="comment">// Hola, soy Ana y tengo 25 años.</span>
+
+<span class="class-name">Persona</span> persona2 = <span class="keyword">new</span> <span class="class-name">Persona</span>();
+persona2.nombre = <span class="string">"Carlos"</span>;
+persona2.edad = <span class="number">30</span>;
+persona2.<span class="method">Presentarse</span>();</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Constructores</h2>
+            <pre><code><span class="keyword">class</span> <span class="class-name">Producto</span>
+{
+    <span class="keyword">public string</span> nombre;
+    <span class="keyword">public double</span> precio;
+    <span class="keyword">public int</span> stock;
+    
+    <span class="comment">// Constructor por defecto</span>
+    <span class="keyword">public</span> <span class="method">Producto</span>()
+    {
+        nombre = <span class="string">"Sin nombre"</span>;
+        precio = <span class="number">0</span>;
+        stock = <span class="number">0</span>;
+    }
+    
+    <span class="comment">// Constructor con parámetros</span>
+    <span class="keyword">public</span> <span class="method">Producto</span>(<span class="keyword">string</span> nombre, <span class="keyword">double</span> precio, <span class="keyword">int</span> stock)
+    {
+        <span class="keyword">this</span>.nombre = nombre;  <span class="comment">// 'this' = objeto actual</span>
+        <span class="keyword">this</span>.precio = precio;
+        <span class="keyword">this</span>.stock = stock;
+    }
+}
+
+<span class="comment">// Uso</span>
+<span class="class-name">Producto</span> p1 = <span class="keyword">new</span> <span class="class-name">Producto</span>();  <span class="comment">// Usa constructor por defecto</span>
+<span class="class-name">Producto</span> p2 = <span class="keyword">new</span> <span class="class-name">Producto</span>(<span class="string">"Laptop"</span>, <span class="number">15000</span>, <span class="number">5</span>);  <span class="comment">// Con parámetros</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Encapsulamiento y Propiedades</h2>
+            <pre><code><span class="keyword">class</span> <span class="class-name">CuentaBancaria</span>
+{
+    <span class="comment">// Campo privado</span>
+    <span class="keyword">private decimal</span> saldo;
+    
+    <span class="comment">// Propiedad de solo lectura</span>
+    <span class="keyword">public decimal</span> Saldo
+    {
+        <span class="keyword">get</span> { <span class="keyword">return</span> saldo; }
+    }
+    
+    <span class="comment">// Propiedad con validación</span>
+    <span class="keyword">public string</span> Titular { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    
+    <span class="keyword">public</span> <span class="method">CuentaBancaria</span>(<span class="keyword">string</span> titular)
+    {
+        Titular = titular;
+        saldo = <span class="number">0</span>;
+    }
+    
+    <span class="keyword">public bool</span> <span class="method">Depositar</span>(<span class="keyword">decimal</span> cantidad)
+    {
+        <span class="keyword">if</span> (cantidad <= <span class="number">0</span>) <span class="keyword">return false</span>;
+        saldo += cantidad;
+        <span class="keyword">return true</span>;
+    }
+    
+    <span class="keyword">public bool</span> <span class="method">Retirar</span>(<span class="keyword">decimal</span> cantidad)
+    {
+        <span class="keyword">if</span> (cantidad <= <span class="number">0</span> || cantidad > saldo) <span class="keyword">return false</span>;
+        saldo -= cantidad;
+        <span class="keyword">return true</span>;
+    }
+}
+
+<span class="comment">// Uso</span>
+<span class="class-name">CuentaBancaria</span> cuenta = <span class="keyword">new</span> <span class="class-name">CuentaBancaria</span>(<span class="string">"Juan"</span>);
+cuenta.<span class="method">Depositar</span>(<span class="number">1000</span>);
+cuenta.<span class="method">Retirar</span>(<span class="number">200</span>);
+Console.<span class="method">WriteLine</span>(<span class="string">$"Saldo: ${cuenta.Saldo}"</span>);  <span class="comment">// 800</span>
+<span class="comment">// cuenta.saldo = 1000000;  // ERROR: saldo es privado</span></code></pre>
+
+            <h3>Modificadores de acceso:</h3>
+            <table>
+                <thead><tr><th>Modificador</th><th>Acceso</th></tr></thead>
+                <tbody>
+                    <tr><td><code>public</code></td><td>Desde cualquier lugar</td></tr>
+                    <tr><td><code>private</code></td><td>Solo dentro de la clase</td></tr>
+                    <tr><td><code>protected</code></td><td>Clase y clases derivadas</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Herencia</h2>
+            <pre><code><span class="comment">// Clase base</span>
+<span class="keyword">class</span> <span class="class-name">Animal</span>
+{
+    <span class="keyword">public string</span> Nombre { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    
+    <span class="keyword">public virtual void</span> <span class="method">HacerSonido</span>()
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">"El animal hace un sonido"</span>);
+    }
+}
+
+<span class="comment">// Clase derivada</span>
+<span class="keyword">class</span> <span class="class-name">Perro</span> : <span class="class-name">Animal</span>
+{
+    <span class="keyword">public string</span> Raza { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    
+    <span class="keyword">public override void</span> <span class="method">HacerSonido</span>()
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"{Nombre} dice: ¡Guau guau!"</span>);
+    }
+    
+    <span class="keyword">public void</span> <span class="method">BuscarPelota</span>()
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"{Nombre} busca la pelota"</span>);
+    }
+}
+
+<span class="keyword">class</span> <span class="class-name">Gato</span> : <span class="class-name">Animal</span>
+{
+    <span class="keyword">public override void</span> <span class="method">HacerSonido</span>()
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"{Nombre} dice: ¡Miau!"</span>);
+    }
+}
+
+<span class="comment">// Uso</span>
+<span class="class-name">Perro</span> firulais = <span class="keyword">new</span> <span class="class-name">Perro</span> { Nombre = <span class="string">"Firulais"</span>, Raza = <span class="string">"Labrador"</span> };
+<span class="class-name">Gato</span> michi = <span class="keyword">new</span> <span class="class-name">Gato</span> { Nombre = <span class="string">"Michi"</span> };
+
+firulais.<span class="method">HacerSonido</span>();  <span class="comment">// Firulais dice: ¡Guau guau!</span>
+michi.<span class="method">HacerSonido</span>();     <span class="comment">// Michi dice: ¡Miau!</span>
+
+<span class="comment">// Polimorfismo</span>
+<span class="class-name">Animal</span>[] animales = { firulais, michi };
+<span class="keyword">foreach</span> (<span class="class-name">Animal</span> a <span class="keyword">in</span> animales)
+{
+    a.<span class="method">HacerSonido</span>();  <span class="comment">// Cada uno hace su propio sonido</span>
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Miembros Estáticos</h2>
+            <pre><code><span class="keyword">class</span> <span class="class-name">Calculadora</span>
+{
+    <span class="comment">// Métodos estáticos - se llaman sin crear objeto</span>
+    <span class="keyword">public static int</span> <span class="method">Sumar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) => a + b;
+    <span class="keyword">public static int</span> <span class="method">Restar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) => a - b;
+}
+
+<span class="comment">// Uso directo sin instanciar</span>
+<span class="keyword">int</span> suma = <span class="class-name">Calculadora</span>.<span class="method">Sumar</span>(<span class="number">5</span>, <span class="number">3</span>);  <span class="comment">// 8</span>
+
+<span class="keyword">class</span> <span class="class-name">Contador</span>
+{
+    <span class="comment">// Campo estático compartido por todas las instancias</span>
+    <span class="keyword">private static int</span> total = <span class="number">0</span>;
+    
+    <span class="keyword">public int</span> Id { <span class="keyword">get</span>; }
+    
+    <span class="keyword">public</span> <span class="method">Contador</span>()
+    {
+        total++;
+        Id = total;
+    }
+    
+    <span class="keyword">public static int</span> <span class="method">ObtenerTotal</span>() => total;
+}
+
+<span class="class-name">Contador</span> c1 = <span class="keyword">new</span> <span class="class-name">Contador</span>();  <span class="comment">// Id = 1</span>
+<span class="class-name">Contador</span> c2 = <span class="keyword">new</span> <span class="class-name">Contador</span>();  <span class="comment">// Id = 2</span>
+Console.<span class="method">WriteLine</span>(<span class="class-name">Contador</span>.<span class="method">ObtenerTotal</span>());  <span class="comment">// 2</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>📚 Resumen del Módulo</h2>
+            <table>
+                <thead><tr><th>Concepto</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>Clase</td><td>Plantilla para objetos</td><td><code>class Persona { }</code></td></tr>
+                    <tr><td>Objeto</td><td>Instancia de clase</td><td><code>new Persona()</code></td></tr>
+                    <tr><td>Constructor</td><td>Inicializa objeto</td><td><code>public Persona(string n)</code></td></tr>
+                    <tr><td>Propiedad</td><td>Acceso controlado</td><td><code>public string Nombre { get; set; }</code></td></tr>
+                    <tr><td>Herencia</td><td>Extender clases</td><td><code>class Perro : Animal</code></td></tr>
+                    <tr><td>override</td><td>Sobrescribir método</td><td><code>public override void Metodo()</code></td></tr>
+                    <tr><td>static</td><td>Pertenece a la clase</td><td><code>static int Sumar()</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <a href="modulo-04.html" class="btn btn-secondary">← Anterior: Funciones</a>
+            <a href="modulo-06.html" class="btn btn-primary">Siguiente: Colecciones →</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Curso de C# para Principiantes | Módulo 5: POO</p>
+    </footer>
+</body>
+</html>

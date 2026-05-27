@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre el Autor | Curso de C#</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .author-hero {
+            background: var(--gradient-primary);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .author-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .author-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-100) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 4rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .author-name {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 800;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .author-title {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        .author-content {
+            max-width: 800px;
+            margin: -3rem auto 0;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .author-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-100);
+        }
+
+        .author-bio {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--gray-600);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .author-quote {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem 2rem;
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            margin: 2rem 0;
+        }
+
+        .author-quote p {
+            font-style: italic;
+            color: var(--gray-700);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .skills-section {
+            margin-top: 2.5rem;
+        }
+
+        .skills-section h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, var(--gray-50), var(--white));
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+
+        .skill-badge span {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-badge p {
+            margin: 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .course-info {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .course-info h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .course-info p {
+            text-align: center;
+            color: var(--gray-500);
+        }
+
+        .back-link {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .author-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .author-avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon">💻</span>
+                <span>Curso C#</span>
+            </a>
+            <button class="nav-toggle" aria-label="Menú" onclick="this.classList.toggle('active'); document.querySelector('nav ul').classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">🏠 Inicio</a></li>
+                <li><a href="modulo-01.html">📖 Introducción</a></li>
+                <li><a href="modulo-02.html">🔢 Fundamentos</a></li>
+                <li><a href="modulo-03.html">🔀 Control</a></li>
+                <li><a href="modulo-04.html">⚙️ Funciones</a></li>
+                <li><a href="modulo-05.html">🏗️ POO</a></li>
+                <li><a href="modulo-06.html">📦 Colecciones</a></li>
+                <li><a href="modulo-07.html">⚠️ Excepciones</a></li>
+                <li><a href="modulo-08.html">💻 Ejercicios</a></li>
+                <li><a href="about.html" class="active">👨‍💻 Autor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="author-hero">
+        <div class="author-avatar">
+            👨‍💻
+        </div>
+        <h1 class="author-name">Ing. Javier Carlos Mateos</h1>
+        <p class="author-title">Desarrollador de Software Full Stack</p>
+    </section>
+
+    <div class="author-content">
+        <div class="author-card">
+            <p class="author-bio">
+                Apasionado por la tecnología y el desarrollo de aplicaciones web. 
+                Con experiencia en el desarrollo Full Stack, me dedico a crear soluciones 
+                tecnológicas innovadoras y a compartir conocimientos con la comunidad de desarrolladores.
+            </p>
+
+            <div class="author-quote">
+                <p>"La programación no es solo escribir código, es resolver problemas y crear soluciones que impacten positivamente en la vida de las personas."</p>
+            </div>
+
+            <div class="skills-section">
+                <h3>Áreas de Especialización</h3>
+                <div class="skills-grid">
+                    <div class="skill-badge">
+                        <span>💻</span>
+                        <p>C# / .NET</p>
+                    </div>
+                    <div class="skill-badge">
+                        <span>🌐</span>
+                        <p>Web Apps</p>
+                    </div>
+                    <div class="skill-badge">
+                        <span>⚙️</span>
+                        <p>Backend</p>
+                    </div>
+                    <div class="skill-badge">
+                        <span>🎨</span>
+                        <p>Frontend</p>
+                    </div>
+                    <div class="skill-badge">
+                        <span>🗄️</span>
+                        <p>Bases de Datos</p>
+                    </div>
+                    <div class="skill-badge">
+                        <span>☁️</span>
+                        <p>Cloud</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-info">
+                <h3>Sobre este Curso</h3>
+                <p>
+                    Este curso de C# para principiantes fue creado con el objetivo de proporcionar 
+                    una guía clara y práctica para aquellos que desean iniciar su camino en la programación.
+                    Cada módulo ha sido diseñado pensando en la experiencia de aprendizaje, 
+                    con ejemplos reales y ejercicios prácticos.
+                </p>
+            </div>
+
+            <div class="back-link">
+                <a href="index.html" class="btn btn-primary">← Volver al Curso</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Curso de C# para Principiantes | Creado por <strong>Ing. Javier Carlos Mateos</strong></p>
+    </footer>
+</body>
+</html>

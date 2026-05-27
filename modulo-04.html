@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: Funciones y Métodos | Curso de C#</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 4: Funciones y Métodos</h1>
+        <p>Organiza y reutiliza tu código</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon">💻</span>
+                <span>Curso C#</span>
+            </a>
+            <button class="nav-toggle" aria-label="Menú" onclick="this.classList.toggle('active'); document.querySelector('nav ul').classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">🏠 Inicio</a></li>
+                <li><a href="modulo-01.html">📖 Introducción</a></li>
+                <li><a href="modulo-02.html">🔢 Fundamentos</a></li>
+                <li><a href="modulo-03.html">🔀 Control</a></li>
+                <li><a href="modulo-04.html" class="active">⚙️ Funciones</a></li>
+                <li><a href="modulo-05.html">🏗️ POO</a></li>
+                <li><a href="modulo-06.html">📦 Colecciones</a></li>
+                <li><a href="modulo-07.html">⚠️ Excepciones</a></li>
+                <li><a href="modulo-08.html">💻 Ejercicios</a></li>
+                <li><a href="about.html">👨‍💻 Autor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2>🎯 Objetivos de este módulo</h2>
+            <ul>
+                <li>Entender qué son las funciones y por qué son importantes</li>
+                <li>Crear funciones con y sin parámetros</li>
+                <li>Trabajar con valores de retorno</li>
+                <li>Comprender el alcance de las variables</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <h2>📖 ¿Qué es una Función?</h2>
+            <p>Una <strong>función</strong> (o método) es un bloque de código reutilizable que realiza una tarea específica.</p>
+
+            <h3>Beneficios de usar funciones:</h3>
+            <table>
+                <thead><tr><th>Beneficio</th><th>Descripción</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Reutilización</strong></td><td>Escribes una vez, usas muchas veces</td></tr>
+                    <tr><td><strong>Organización</strong></td><td>Divide problemas grandes en partes pequeñas</td></tr>
+                    <tr><td><strong>Mantenimiento</strong></td><td>Cambias en un solo lugar</td></tr>
+                    <tr><td><strong>Legibilidad</strong></td><td>Código más fácil de entender</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Función Básica (void)</h2>
+            <pre><code><span class="comment">// Función que no retorna valor</span>
+<span class="keyword">static void</span> <span class="method">Saludar</span>()
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"¡Hola! Bienvenido al programa."</span>);
+}
+
+<span class="comment">// Llamar a la función</span>
+<span class="keyword">static void</span> <span class="method">Main</span>()
+{
+    <span class="method">Saludar</span>();  <span class="comment">// Imprime: ¡Hola! Bienvenido al programa.</span>
+    <span class="method">Saludar</span>();  <span class="comment">// Puedes llamarla múltiples veces</span>
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Funciones con Parámetros</h2>
+            <pre><code><span class="comment">// Un parámetro</span>
+<span class="keyword">static void</span> <span class="method">SaludarPersona</span>(<span class="keyword">string</span> nombre)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"¡Hola, {nombre}!"</span>);
+}
+
+<span class="comment">// Múltiples parámetros</span>
+<span class="keyword">static void</span> <span class="method">MostrarInfo</span>(<span class="keyword">string</span> nombre, <span class="keyword">int</span> edad, <span class="keyword">string</span> ciudad)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Nombre: {nombre}"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Edad: {edad} años"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Ciudad: {ciudad}"</span>);
+}
+
+<span class="comment">// Uso</span>
+<span class="method">SaludarPersona</span>(<span class="string">"Ana"</span>);
+<span class="method">SaludarPersona</span>(<span class="string">"Carlos"</span>);
+<span class="method">MostrarInfo</span>(<span class="string">"María"</span>, <span class="number">25</span>, <span class="string">"México"</span>);</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Funciones con Valor de Retorno</h2>
+            <pre><code><span class="comment">// Función que retorna un entero</span>
+<span class="keyword">static int</span> <span class="method">Sumar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+{
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="comment">// Función que retorna un string</span>
+<span class="keyword">static string</span> <span class="method">CrearSaludo</span>(<span class="keyword">string</span> nombre)
+{
+    <span class="keyword">return</span> <span class="string">$"¡Bienvenido, {nombre}!"</span>;
+}
+
+<span class="comment">// Función que retorna un booleano</span>
+<span class="keyword">static bool</span> <span class="method">EsPar</span>(<span class="keyword">int</span> numero)
+{
+    <span class="keyword">return</span> numero % <span class="number">2</span> == <span class="number">0</span>;
+}
+
+<span class="comment">// Uso</span>
+<span class="keyword">int</span> resultado = <span class="method">Sumar</span>(<span class="number">5</span>, <span class="number">3</span>);  <span class="comment">// resultado = 8</span>
+Console.<span class="method">WriteLine</span>(<span class="method">CrearSaludo</span>(<span class="string">"Ana"</span>));
+Console.<span class="method">WriteLine</span>(<span class="string">$"¿8 es par? {<span class="method">EsPar</span>(<span class="number">8</span>)}"</span>);  <span class="comment">// true</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Calculadora con Funciones</h2>
+            <pre><code><span class="keyword">class</span> <span class="class-name">Calculadora</span>
+{
+    <span class="keyword">static void</span> <span class="method">Main</span>()
+    {
+        <span class="keyword">double</span> a = <span class="number">10</span>, b = <span class="number">3</span>;
+        
+        Console.<span class="method">WriteLine</span>(<span class="string">$"Suma: {<span class="method">Sumar</span>(a, b)}"</span>);
+        Console.<span class="method">WriteLine</span>(<span class="string">$"Resta: {<span class="method">Restar</span>(a, b)}"</span>);
+        Console.<span class="method">WriteLine</span>(<span class="string">$"Multiplicación: {<span class="method">Multiplicar</span>(a, b)}"</span>);
+        Console.<span class="method">WriteLine</span>(<span class="string">$"División: {<span class="method">Dividir</span>(a, b)}"</span>);
+    }
+    
+    <span class="keyword">static double</span> <span class="method">Sumar</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) => a + b;
+    <span class="keyword">static double</span> <span class="method">Restar</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) => a - b;
+    <span class="keyword">static double</span> <span class="method">Multiplicar</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) => a * b;
+    <span class="keyword">static double</span> <span class="method">Dividir</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) => b != <span class="number">0</span> ? a / b : <span class="number">0</span>;
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Parámetros Opcionales</h2>
+            <pre><code><span class="keyword">static void</span> <span class="method">ImprimirMensaje</span>(<span class="keyword">string</span> mensaje, <span class="keyword">int</span> veces = <span class="number">1</span>, <span class="keyword">string</span> prefijo = <span class="string">"-"</span>)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < veces; i++)
+    {
+        Console.<span class="method">WriteLine</span>(<span class="string">$"{prefijo} {mensaje}"</span>);
+    }
+}
+
+<span class="comment">// Diferentes formas de llamar</span>
+<span class="method">ImprimirMensaje</span>(<span class="string">"Hola"</span>);              <span class="comment">// Usa valores por defecto</span>
+<span class="method">ImprimirMensaje</span>(<span class="string">"Hola"</span>, <span class="number">3</span>);           <span class="comment">// Repite 3 veces</span>
+<span class="method">ImprimirMensaje</span>(<span class="string">"Hola"</span>, <span class="number">2</span>, <span class="string">"*"</span>);     <span class="comment">// Personaliza todo</span>
+<span class="method">ImprimirMensaje</span>(<span class="string">"Hola"</span>, prefijo: <span class="string">">"</span>); <span class="comment">// Parámetro nombrado</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Parámetros ref y out</h2>
+            <pre><code><span class="comment">// ref: modifica la variable original</span>
+<span class="keyword">static void</span> <span class="method">Duplicar</span>(<span class="keyword">ref int</span> numero)
+{
+    numero *= <span class="number">2</span>;
+}
+
+<span class="keyword">int</span> valor = <span class="number">5</span>;
+<span class="method">Duplicar</span>(<span class="keyword">ref</span> valor);
+Console.<span class="method">WriteLine</span>(valor);  <span class="comment">// 10</span>
+
+<span class="comment">// out: retorna múltiples valores</span>
+<span class="keyword">static void</span> <span class="method">Dividir</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">out int</span> cociente, <span class="keyword">out int</span> resto)
+{
+    cociente = a / b;
+    resto = a % b;
+}
+
+<span class="method">Dividir</span>(<span class="number">17</span>, <span class="number">5</span>, <span class="keyword">out int</span> c, <span class="keyword">out int</span> r);
+Console.<span class="method">WriteLine</span>(<span class="string">$"17 ÷ 5 = {c} resto {r}"</span>);  <span class="comment">// 3 resto 2</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Sobrecarga de Métodos</h2>
+            <pre><code><span class="comment">// Mismo nombre, diferentes parámetros</span>
+<span class="keyword">static int</span> <span class="method">Sumar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) => a + b;
+<span class="keyword">static int</span> <span class="method">Sumar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c) => a + b + c;
+<span class="keyword">static double</span> <span class="method">Sumar</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) => a + b;
+
+<span class="comment">// C# elige automáticamente la versión correcta</span>
+Console.<span class="method">WriteLine</span>(<span class="method">Sumar</span>(<span class="number">5</span>, <span class="number">3</span>));         <span class="comment">// 8 (int, int)</span>
+Console.<span class="method">WriteLine</span>(<span class="method">Sumar</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>));      <span class="comment">// 10 (int, int, int)</span>
+Console.<span class="method">WriteLine</span>(<span class="method">Sumar</span>(<span class="number">5.5</span>, <span class="number">3.3</span>));    <span class="comment">// 8.8 (double, double)</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Funciones Recursivas</h2>
+            <pre><code><span class="comment">// Factorial: 5! = 5 × 4 × 3 × 2 × 1 = 120</span>
+<span class="keyword">static long</span> <span class="method">Factorial</span>(<span class="keyword">int</span> n)
+{
+    <span class="keyword">if</span> (n <= <span class="number">1</span>)
+        <span class="keyword">return</span> <span class="number">1</span>;  <span class="comment">// Caso base</span>
+    
+    <span class="keyword">return</span> n * <span class="method">Factorial</span>(n - <span class="number">1</span>);  <span class="comment">// Caso recursivo</span>
+}
+
+<span class="comment">// Fibonacci: 1, 1, 2, 3, 5, 8, 13...</span>
+<span class="keyword">static int</span> <span class="method">Fibonacci</span>(<span class="keyword">int</span> n)
+{
+    <span class="keyword">if</span> (n <= <span class="number">2</span>)
+        <span class="keyword">return</span> <span class="number">1</span>;
+    
+    <span class="keyword">return</span> <span class="method">Fibonacci</span>(n - <span class="number">1</span>) + <span class="method">Fibonacci</span>(n - <span class="number">2</span>);
+}
+
+Console.<span class="method">WriteLine</span>(<span class="string">$"5! = {<span class="method">Factorial</span>(<span class="number">5</span>)}"</span>);  <span class="comment">// 120</span>
+Console.<span class="method">WriteLine</span>(<span class="string">$"Fib(10) = {<span class="method">Fibonacci</span>(<span class="number">10</span>)}"</span>);  <span class="comment">// 55</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>📚 Resumen del Módulo</h2>
+            <table>
+                <thead><tr><th>Concepto</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>void</td><td>No retorna valor</td><td><code>static void Saludar()</code></td></tr>
+                    <tr><td>Con retorno</td><td>Devuelve un valor</td><td><code>static int Sumar(int a, int b)</code></td></tr>
+                    <tr><td>Parámetros</td><td>Datos de entrada</td><td><code>(string nombre, int edad)</code></td></tr>
+                    <tr><td>Opcionales</td><td>Valor por defecto</td><td><code>(int x = 10)</code></td></tr>
+                    <tr><td>ref</td><td>Modifica original</td><td><code>ref int numero</code></td></tr>
+                    <tr><td>out</td><td>Múltiples retornos</td><td><code>out int resultado</code></td></tr>
+                    <tr><td>Sobrecarga</td><td>Mismo nombre, diferentes params</td><td>Múltiples <code>Sumar()</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <a href="modulo-03.html" class="btn btn-secondary">← Anterior: Control</a>
+            <a href="modulo-05.html" class="btn btn-primary">Siguiente: POO →</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Curso de C# para Principiantes | Módulo 4: Funciones y Métodos</p>
+    </footer>
+</body>
+</html>

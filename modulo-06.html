@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6: Colecciones | Curso de C#</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 6: Colecciones</h1>
+        <p>Arrays, Listas, Diccionarios y LINQ</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon">💻</span>
+                <span>Curso C#</span>
+            </a>
+            <button class="nav-toggle" aria-label="Menú" onclick="this.classList.toggle('active'); document.querySelector('nav ul').classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">🏠 Inicio</a></li>
+                <li><a href="modulo-01.html">📖 Introducción</a></li>
+                <li><a href="modulo-02.html">🔢 Fundamentos</a></li>
+                <li><a href="modulo-03.html">🔀 Control</a></li>
+                <li><a href="modulo-04.html">⚙️ Funciones</a></li>
+                <li><a href="modulo-05.html">🏗️ POO</a></li>
+                <li><a href="modulo-06.html" class="active">📦 Colecciones</a></li>
+                <li><a href="modulo-07.html">⚠️ Excepciones</a></li>
+                <li><a href="modulo-08.html">💻 Ejercicios</a></li>
+                <li><a href="about.html">👨‍💻 Autor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2>🎯 Objetivos de este módulo</h2>
+            <ul>
+                <li>Dominar arrays unidimensionales y multidimensionales</li>
+                <li>Trabajar con List&lt;T&gt; y sus métodos</li>
+                <li>Usar Dictionary&lt;TKey, TValue&gt;</li>
+                <li>Aplicar LINQ para consultas</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Arrays (Arreglos)</h2>
+            <p>Colección de tamaño fijo del mismo tipo de datos.</p>
+
+            <pre><code><span class="comment">// Declaración e inicialización</span>
+<span class="keyword">int</span>[] numeros = <span class="keyword">new int</span>[<span class="number">5</span>];  <span class="comment">// Array de 5 elementos</span>
+numeros[<span class="number">0</span>] = <span class="number">10</span>;
+numeros[<span class="number">1</span>] = <span class="number">20</span>;
+
+<span class="comment">// Inicialización directa</span>
+<span class="keyword">string</span>[] dias = { <span class="string">"Lunes"</span>, <span class="string">"Martes"</span>, <span class="string">"Miércoles"</span> };
+<span class="keyword">double</span>[] precios = <span class="keyword">new double</span>[] { <span class="number">99.99</span>, <span class="number">149.50</span>, <span class="number">75.00</span> };
+
+<span class="comment">// Acceder a elementos (índice desde 0)</span>
+Console.<span class="method">WriteLine</span>(dias[<span class="number">0</span>]);  <span class="comment">// Lunes</span>
+Console.<span class="method">WriteLine</span>(dias[dias.Length - <span class="number">1</span>]);  <span class="comment">// Último elemento</span>
+
+<span class="comment">// Recorrer con for</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < dias.Length; i++)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Día {i + <span class="number">1</span>}: {dias[i]}"</span>);
+}
+
+<span class="comment">// Recorrer con foreach</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> dia <span class="keyword">in</span> dias)
+{
+    Console.<span class="method">WriteLine</span>(dia);
+}</code></pre>
+
+            <h3>Operaciones con Arrays</h3>
+            <pre><code><span class="keyword">int</span>[] nums = { <span class="number">45</span>, <span class="number">12</span>, <span class="number">78</span>, <span class="number">34</span>, <span class="number">56</span> };
+
+<span class="comment">// Buscar</span>
+<span class="keyword">int</span> indice = Array.<span class="method">IndexOf</span>(nums, <span class="number">34</span>);  <span class="comment">// 3</span>
+<span class="keyword">bool</span> existe = Array.<span class="method">Exists</span>(nums, n => n == <span class="number">78</span>);  <span class="comment">// true</span>
+
+<span class="comment">// Ordenar</span>
+Array.<span class="method">Sort</span>(nums);     <span class="comment">// Ascendente: 12, 34, 45, 56, 78</span>
+Array.<span class="method">Reverse</span>(nums);  <span class="comment">// Descendente: 78, 56, 45, 34, 12</span>
+
+<span class="comment">// Filtrar</span>
+<span class="keyword">int</span>[] mayores = Array.<span class="method">FindAll</span>(nums, n => n > <span class="number">50</span>);</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 List&lt;T&gt; - Listas Genéricas</h2>
+            <p>Colección dinámica que puede crecer o reducirse.</p>
+
+            <pre><code><span class="keyword">using</span> System.Collections.Generic;
+
+<span class="comment">// Crear lista</span>
+List<<span class="keyword">string</span>> frutas = <span class="keyword">new</span> List<<span class="keyword">string</span>>();
+
+<span class="comment">// Agregar elementos</span>
+frutas.<span class="method">Add</span>(<span class="string">"Manzana"</span>);
+frutas.<span class="method">Add</span>(<span class="string">"Naranja"</span>);
+frutas.<span class="method">AddRange</span>(<span class="keyword">new</span>[] { <span class="string">"Plátano"</span>, <span class="string">"Fresa"</span> });
+
+<span class="comment">// Insertar en posición</span>
+frutas.<span class="method">Insert</span>(<span class="number">1</span>, <span class="string">"Mango"</span>);
+
+<span class="comment">// Eliminar</span>
+frutas.<span class="method">Remove</span>(<span class="string">"Naranja"</span>);  <span class="comment">// Por valor</span>
+frutas.<span class="method">RemoveAt</span>(<span class="number">0</span>);         <span class="comment">// Por índice</span>
+
+<span class="comment">// Buscar</span>
+<span class="keyword">bool</span> tiene = frutas.<span class="method">Contains</span>(<span class="string">"Fresa"</span>);  <span class="comment">// true</span>
+<span class="keyword">int</span> pos = frutas.<span class="method">IndexOf</span>(<span class="string">"Plátano"</span>);    <span class="comment">// índice</span>
+
+<span class="comment">// Propiedades</span>
+Console.<span class="method">WriteLine</span>(frutas.Count);    <span class="comment">// Cantidad</span>
+Console.<span class="method">WriteLine</span>(frutas[<span class="number">0</span>]);       <span class="comment">// Primer elemento</span>
+
+<span class="comment">// Ordenar</span>
+frutas.<span class="method">Sort</span>();
+frutas.<span class="method">Reverse</span>();
+
+<span class="comment">// Limpiar</span>
+frutas.<span class="method">Clear</span>();</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Dictionary&lt;TKey, TValue&gt;</h2>
+            <p>Almacena pares de clave-valor.</p>
+
+            <pre><code><span class="keyword">using</span> System.Collections.Generic;
+
+<span class="comment">// Crear diccionario</span>
+Dictionary<<span class="keyword">string</span>, <span class="keyword">int</span>> edades = <span class="keyword">new</span> Dictionary<<span class="keyword">string</span>, <span class="keyword">int</span>>();
+
+<span class="comment">// Agregar elementos</span>
+edades.<span class="method">Add</span>(<span class="string">"Ana"</span>, <span class="number">25</span>);
+edades[<span class="string">"Carlos"</span>] = <span class="number">30</span>;  <span class="comment">// Otra forma</span>
+edades[<span class="string">"María"</span>] = <span class="number">28</span>;
+
+<span class="comment">// Acceder a valores</span>
+Console.<span class="method">WriteLine</span>(edades[<span class="string">"Ana"</span>]);  <span class="comment">// 25</span>
+
+<span class="comment">// Acceso seguro</span>
+<span class="keyword">if</span> (edades.<span class="method">TryGetValue</span>(<span class="string">"Juan"</span>, <span class="keyword">out int</span> edad))
+{
+    Console.<span class="method">WriteLine</span>(edad);
+}
+<span class="keyword">else</span>
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"No encontrado"</span>);
+}
+
+<span class="comment">// Verificar existencia</span>
+<span class="keyword">bool</span> existe = edades.<span class="method">ContainsKey</span>(<span class="string">"Carlos"</span>);  <span class="comment">// true</span>
+
+<span class="comment">// Eliminar</span>
+edades.<span class="method">Remove</span>(<span class="string">"María"</span>);
+
+<span class="comment">// Recorrer</span>
+<span class="keyword">foreach</span> (KeyValuePair<<span class="keyword">string</span>, <span class="keyword">int</span>> par <span class="keyword">in</span> edades)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"{par.Key}: {par.Value} años"</span>);
+}
+
+<span class="comment">// Solo claves o valores</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> nombre <span class="keyword">in</span> edades.Keys) { }
+<span class="keyword">foreach</span> (<span class="keyword">int</span> e <span class="keyword">in</span> edades.Values) { }</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 LINQ Básico</h2>
+            <p><strong>LINQ</strong> permite consultar colecciones de forma elegante.</p>
+
+            <pre><code><span class="keyword">using</span> System.Linq;
+
+List<<span class="keyword">int</span>> numeros = <span class="keyword">new</span> List<<span class="keyword">int</span>> { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span> };
+
+<span class="comment">// Filtrar (Where)</span>
+<span class="keyword">var</span> pares = numeros.<span class="method">Where</span>(n => n % <span class="number">2</span> == <span class="number">0</span>);
+<span class="comment">// 2, 4, 6, 8, 10</span>
+
+<span class="comment">// Transformar (Select)</span>
+<span class="keyword">var</span> cuadrados = numeros.<span class="method">Select</span>(n => n * n);
+<span class="comment">// 1, 4, 9, 16, 25...</span>
+
+<span class="comment">// Ordenar</span>
+<span class="keyword">var</span> ordenados = numeros.<span class="method">OrderBy</span>(n => n);
+<span class="keyword">var</span> descendente = numeros.<span class="method">OrderByDescending</span>(n => n);
+
+<span class="comment">// Agregaciones</span>
+<span class="keyword">int</span> suma = numeros.<span class="method">Sum</span>();           <span class="comment">// 55</span>
+<span class="keyword">double</span> promedio = numeros.<span class="method">Average</span>();  <span class="comment">// 5.5</span>
+<span class="keyword">int</span> maximo = numeros.<span class="method">Max</span>();          <span class="comment">// 10</span>
+<span class="keyword">int</span> minimo = numeros.<span class="method">Min</span>();          <span class="comment">// 1</span>
+<span class="keyword">int</span> cantidad = numeros.<span class="method">Count</span>();      <span class="comment">// 10</span>
+
+<span class="comment">// Primero y último</span>
+<span class="keyword">int</span> primero = numeros.<span class="method">First</span>();
+<span class="keyword">int</span> ultimo = numeros.<span class="method">Last</span>();
+<span class="keyword">int</span> primerPar = numeros.<span class="method">First</span>(n => n % <span class="number">2</span> == <span class="number">0</span>);
+
+<span class="comment">// Verificaciones</span>
+<span class="keyword">bool</span> hayMayores = numeros.<span class="method">Any</span>(n => n > <span class="number">5</span>);   <span class="comment">// true</span>
+<span class="keyword">bool</span> todosPositivos = numeros.<span class="method">All</span>(n => n > <span class="number">0</span>);  <span class="comment">// true</span>
+
+<span class="comment">// Combinar operaciones</span>
+<span class="keyword">var</span> resultado = numeros
+    .<span class="method">Where</span>(n => n % <span class="number">2</span> == <span class="number">0</span>)
+    .<span class="method">Select</span>(n => n * n)
+    .<span class="method">OrderByDescending</span>(n => n);
+<span class="comment">// 100, 64, 36, 16, 4</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>📚 Resumen del Módulo</h2>
+            <table>
+                <thead><tr><th>Colección</th><th>Características</th><th>Uso</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Array</code></td><td>Tamaño fijo</td><td>Datos de tamaño conocido</td></tr>
+                    <tr><td><code>List&lt;T&gt;</code></td><td>Tamaño dinámico</td><td>Colección general</td></tr>
+                    <tr><td><code>Dictionary</code></td><td>Clave-valor</td><td>Búsqueda rápida por clave</td></tr>
+                    <tr><td>LINQ</td><td>Consultas elegantes</td><td>Filtrar, ordenar, agrupar</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <a href="modulo-05.html" class="btn btn-secondary">← Anterior: POO</a>
+            <a href="modulo-07.html" class="btn btn-primary">Siguiente: Excepciones →</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Curso de C# para Principiantes | Módulo 6: Colecciones</p>
+    </footer>
+</body>
+</html>

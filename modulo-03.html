@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Estructuras de Control | Curso de C#</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo 3: Estructuras de Control</h1>
+        <p>Condicionales y Bucles</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon">💻</span>
+                <span>Curso C#</span>
+            </a>
+            <button class="nav-toggle" aria-label="Menú" onclick="this.classList.toggle('active'); document.querySelector('nav ul').classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">🏠 Inicio</a></li>
+                <li><a href="modulo-01.html">📖 Introducción</a></li>
+                <li><a href="modulo-02.html">🔢 Fundamentos</a></li>
+                <li><a href="modulo-03.html" class="active">🔀 Control</a></li>
+                <li><a href="modulo-04.html">⚙️ Funciones</a></li>
+                <li><a href="modulo-05.html">🏗️ POO</a></li>
+                <li><a href="modulo-06.html">📦 Colecciones</a></li>
+                <li><a href="modulo-07.html">⚠️ Excepciones</a></li>
+                <li><a href="modulo-08.html">💻 Ejercicios</a></li>
+                <li><a href="about.html">👨‍💻 Autor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2>🎯 Objetivos de este módulo</h2>
+            <ul>
+                <li>Entender y usar condicionales (if, else, switch)</li>
+                <li>Dominar los bucles (for, while, do-while, foreach)</li>
+                <li>Controlar el flujo de tus programas</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Condicional IF</h2>
+            <p>El <code>if</code> ejecuta código solo si una condición es verdadera.</p>
+
+            <pre><code><span class="comment">// Sintaxis básica</span>
+<span class="keyword">if</span> (condición)
+{
+    <span class="comment">// Código si es verdadero</span>
+}
+
+<span class="comment">// Ejemplo</span>
+<span class="keyword">int</span> edad = <span class="number">20</span>;
+
+<span class="keyword">if</span> (edad >= <span class="number">18</span>)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"Eres mayor de edad"</span>);
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 IF - ELSE</h2>
+            <pre><code><span class="keyword">int</span> numero = <span class="number">7</span>;
+
+<span class="keyword">if</span> (numero % <span class="number">2</span> == <span class="number">0</span>)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"{numero} es PAR"</span>);
+}
+<span class="keyword">else</span>
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"{numero} es IMPAR"</span>);
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 IF - ELSE IF - ELSE</h2>
+            <pre><code><span class="keyword">int</span> nota = <span class="number">85</span>;
+<span class="keyword">string</span> letra;
+
+<span class="keyword">if</span> (nota >= <span class="number">90</span>)
+{
+    letra = <span class="string">"A"</span>;
+}
+<span class="keyword">else if</span> (nota >= <span class="number">80</span>)
+{
+    letra = <span class="string">"B"</span>;
+}
+<span class="keyword">else if</span> (nota >= <span class="number">70</span>)
+{
+    letra = <span class="string">"C"</span>;
+}
+<span class="keyword">else if</span> (nota >= <span class="number">60</span>)
+{
+    letra = <span class="string">"D"</span>;
+}
+<span class="keyword">else</span>
+{
+    letra = <span class="string">"F"</span>;
+}
+
+Console.<span class="method">WriteLine</span>(<span class="string">$"Tu calificación es: {letra}"</span>);</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 Operador Ternario</h2>
+            <p>Forma corta de escribir un if-else simple:</p>
+            <pre><code><span class="comment">// condición ? valorSiTrue : valorSiFalse</span>
+
+<span class="keyword">int</span> edad = <span class="number">20</span>;
+<span class="keyword">string</span> resultado = edad >= <span class="number">18</span> ? <span class="string">"Mayor"</span> : <span class="string">"Menor"</span>;
+
+<span class="keyword">int</span> numero = <span class="number">7</span>;
+<span class="keyword">string</span> paridad = numero % <span class="number">2</span> == <span class="number">0</span> ? <span class="string">"Par"</span> : <span class="string">"Impar"</span>;</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔹 SWITCH</h2>
+            <pre><code><span class="keyword">int</span> dia = <span class="number">3</span>;
+<span class="keyword">string</span> nombreDia;
+
+<span class="keyword">switch</span> (dia)
+{
+    <span class="keyword">case</span> <span class="number">1</span>:
+        nombreDia = <span class="string">"Lunes"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">2</span>:
+        nombreDia = <span class="string">"Martes"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">3</span>:
+        nombreDia = <span class="string">"Miércoles"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">4</span>:
+        nombreDia = <span class="string">"Jueves"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">5</span>:
+        nombreDia = <span class="string">"Viernes"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">6</span>:
+    <span class="keyword">case</span> <span class="number">7</span>:
+        nombreDia = <span class="string">"Fin de semana"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        nombreDia = <span class="string">"Día inválido"</span>;
+        <span class="keyword">break</span>;
+}
+
+Console.<span class="method">WriteLine</span>(nombreDia);</code></pre>
+
+            <h3>Switch Expression (C# 8+)</h3>
+            <pre><code><span class="keyword">string</span> nombreDia = dia <span class="keyword">switch</span>
+{
+    <span class="number">1</span> => <span class="string">"Lunes"</span>,
+    <span class="number">2</span> => <span class="string">"Martes"</span>,
+    <span class="number">3</span> => <span class="string">"Miércoles"</span>,
+    <span class="number">4</span> => <span class="string">"Jueves"</span>,
+    <span class="number">5</span> => <span class="string">"Viernes"</span>,
+    <span class="number">6</span> or <span class="number">7</span> => <span class="string">"Fin de semana"</span>,
+    _ => <span class="string">"Día inválido"</span>
+};</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔄 Bucle FOR</h2>
+            <p>Repite código un número específico de veces.</p>
+
+            <pre><code><span class="comment">// Sintaxis: for (inicio; condición; incremento)</span>
+
+<span class="comment">// Contar del 1 al 10</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Número: {i}"</span>);
+}
+
+<span class="comment">// Contar de 2 en 2</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i <= <span class="number">20</span>; i += <span class="number">2</span>)
+{
+    Console.<span class="method">Write</span>(<span class="string">$"{i} "</span>);
+}
+
+<span class="comment">// Cuenta regresiva</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">10</span>; i >= <span class="number">0</span>; i--)
+{
+    Console.<span class="method">WriteLine</span>(i);
+}
+Console.<span class="method">WriteLine</span>(<span class="string">"¡Despegue!"</span>);</code></pre>
+
+            <h3>Tabla de Multiplicar</h3>
+            <pre><code><span class="keyword">int</span> numero = <span class="number">7</span>;
+
+Console.<span class="method">WriteLine</span>(<span class="string">$"Tabla del {numero}"</span>);
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++)
+{
+    <span class="keyword">int</span> resultado = numero * i;
+    Console.<span class="method">WriteLine</span>(<span class="string">$"{numero} × {i} = {resultado}"</span>);
+}</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔄 Bucle WHILE</h2>
+            <p>Repite mientras una condición sea verdadera.</p>
+
+            <pre><code><span class="comment">// Adivina el número</span>
+Random random = <span class="keyword">new</span> Random();
+<span class="keyword">int</span> numeroSecreto = random.<span class="method">Next</span>(<span class="number">1</span>, <span class="number">101</span>);
+<span class="keyword">int</span> intento = <span class="number">0</span>;
+
+<span class="keyword">while</span> (intento != numeroSecreto)
+{
+    Console.<span class="method">Write</span>(<span class="string">"Adivina (1-100): "</span>);
+    intento = <span class="keyword">int</span>.<span class="method">Parse</span>(Console.<span class="method">ReadLine</span>());
+    
+    <span class="keyword">if</span> (intento < numeroSecreto)
+        Console.<span class="method">WriteLine</span>(<span class="string">"Mayor..."</span>);
+    <span class="keyword">else if</span> (intento > numeroSecreto)
+        Console.<span class="method">WriteLine</span>(<span class="string">"Menor..."</span>);
+}
+
+Console.<span class="method">WriteLine</span>(<span class="string">"¡Correcto!"</span>);</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔄 Bucle DO-WHILE</h2>
+            <p>Similar al while, pero <strong>siempre ejecuta al menos una vez</strong>.</p>
+
+            <pre><code><span class="keyword">int</span> opcion;
+
+<span class="keyword">do</span>
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">"═══ MENÚ ═══"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">"1. Opción A"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">"2. Opción B"</span>);
+    Console.<span class="method">WriteLine</span>(<span class="string">"0. Salir"</span>);
+    Console.<span class="method">Write</span>(<span class="string">"Elige: "</span>);
+    
+    opcion = <span class="keyword">int</span>.<span class="method">Parse</span>(Console.<span class="method">ReadLine</span>());
+    
+    <span class="keyword">switch</span> (opcion)
+    {
+        <span class="keyword">case</span> <span class="number">1</span>: Console.<span class="method">WriteLine</span>(<span class="string">"Elegiste A"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">2</span>: Console.<span class="method">WriteLine</span>(<span class="string">"Elegiste B"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">0</span>: Console.<span class="method">WriteLine</span>(<span class="string">"¡Adiós!"</span>); <span class="keyword">break</span>;
+    }
+    
+} <span class="keyword">while</span> (opcion != <span class="number">0</span>);</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>🔄 Bucle FOREACH</h2>
+            <p>Recorre colecciones de elementos.</p>
+
+            <pre><code><span class="keyword">string</span>[] frutas = { <span class="string">"Manzana"</span>, <span class="string">"Naranja"</span>, <span class="string">"Plátano"</span> };
+
+<span class="keyword">foreach</span> (<span class="keyword">string</span> fruta <span class="keyword">in</span> frutas)
+{
+    Console.<span class="method">WriteLine</span>(<span class="string">$"Fruta: {fruta}"</span>);
+}
+
+<span class="comment">// Sumar números</span>
+<span class="keyword">int</span>[] numeros = { <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span> };
+<span class="keyword">int</span> suma = <span class="number">0</span>;
+
+<span class="keyword">foreach</span> (<span class="keyword">int</span> num <span class="keyword">in</span> numeros)
+{
+    suma += num;
+}
+Console.<span class="method">WriteLine</span>(<span class="string">$"Suma total: {suma}"</span>);</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>⏹️ BREAK y CONTINUE</h2>
+            <pre><code><span class="comment">// BREAK - Sale del bucle</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++)
+{
+    <span class="keyword">if</span> (i == <span class="number">5</span>)
+        <span class="keyword">break</span>;  <span class="comment">// Sale cuando i es 5</span>
+    Console.<span class="method">WriteLine</span>(i);
+}
+<span class="comment">// Imprime: 1, 2, 3, 4</span>
+
+<span class="comment">// CONTINUE - Salta a la siguiente iteración</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++)
+{
+    <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>)
+        <span class="keyword">continue</span>;  <span class="comment">// Salta los pares</span>
+    Console.<span class="method">WriteLine</span>(i);
+}
+<span class="comment">// Imprime: 1, 3, 5, 7, 9</span></code></pre>
+        </div>
+
+        <div class="container">
+            <h2>📚 Resumen del Módulo</h2>
+            <table>
+                <thead>
+                    <tr><th>Estructura</th><th>Uso</th><th>Ejemplo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>if</code></td><td>Decisión simple</td><td><code>if (edad >= 18) { }</code></td></tr>
+                    <tr><td><code>if-else</code></td><td>Dos opciones</td><td><code>if (x > 0) { } else { }</code></td></tr>
+                    <tr><td><code>switch</code></td><td>Múltiples valores</td><td><code>switch (dia) { case 1: ... }</code></td></tr>
+                    <tr><td><code>for</code></td><td>Repetir N veces</td><td><code>for (int i = 0; i < 10; i++)</code></td></tr>
+                    <tr><td><code>while</code></td><td>Repetir mientras...</td><td><code>while (condicion) { }</code></td></tr>
+                    <tr><td><code>do-while</code></td><td>Al menos una vez</td><td><code>do { } while (cond);</code></td></tr>
+                    <tr><td><code>foreach</code></td><td>Recorrer colección</td><td><code>foreach (var x in lista)</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <a href="modulo-02.html" class="btn btn-secondary">← Anterior: Fundamentos</a>
+            <a href="modulo-04.html" class="btn btn-primary">Siguiente: Funciones →</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Curso de C# para Principiantes | Módulo 3: Estructuras de Control</p>
+    </footer>
+</body>
+</html>
