@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo 3: Estructuras de Control | Curso de C#</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+    (function(){
+        if(sessionStorage.getItem('module2Done') !== 'true'){
+            alert('Debes completar el Módulo 2 antes de acceder a este módulo.');
+            window.location.href = 'modulo-02.html';
+        }
+    })();
+    </script>
 </head>
 <body>
     <header>
@@ -316,12 +324,50 @@ Console.<span class="method">WriteLine</span>(<span class="string">$"Suma total:
 
         <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
             <a href="modulo-02.html" class="btn btn-secondary">← Anterior: Fundamentos</a>
-            <a href="modulo-04.html" class="btn btn-primary">Siguiente: Funciones →</a>
+            <a id="next-link" href="modulo-04.html" class="btn btn-primary">Siguiente: Funciones →</a>
         </div>
     </main>
 
     <footer>
         <p>Curso de C# para Principiantes | Módulo 3: Estructuras de Control</p>
     </footer>
+    <script>
+    (function(){
+        var moduleNum = 3;
+        var nextLink = document.getElementById('next-link');
+        var main = document.querySelector('main');
+        var container = document.createElement('div');
+        container.className = 'container';
+        container.id = 'module-quiz';
+        container.innerHTML = '\n            <h2>📝 Quiz del Módulo 3</h2>\n            <p>Responde las 3 preguntas correctamente para continuar.</p>\n            <ol>\n              <li>¿Qué estructura usarías para elegir entre múltiples caminos según el valor de una variable?</li>\n              <li>¿Qué bucle recorre una colección elemento a elemento?</li>\n              <li>¿Cómo escribirías la condición para ejecutar código cuando x sea mayor que 10?</li>\n            </ol>\n            <input id="q1" placeholder="Respuesta 1" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">\n            <input id="q2" placeholder="Respuesta 2" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">\n            <input id="q3" placeholder="Respuesta 3" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">\n            <div style="margin-top:0.5rem;"><button id="submit-quiz" class="btn btn-primary">Enviar respuestas</button></div>\n            <p id="quiz-msg" style="display:none; margin-top:0.5rem;"></p>\n        ';
+        if(main){ main.insertBefore(container, main.querySelector('div[style*="display: flex"]')); }
+
+        function checkAnswers(){
+            var a1 = (document.getElementById('q1')||{value:''}).value.toLowerCase();
+            var a2 = (document.getElementById('q2')||{value:''}).value.toLowerCase();
+            var a3 = (document.getElementById('q3')||{value:''}).value.toLowerCase();
+            var ok1 = a1.indexOf('switch') !== -1 || a1.indexOf('if') !== -1;
+            var ok2 = a2.indexOf('foreach') !== -1 || a2.indexOf('for each') !== -1 || a2.indexOf('for') !== -1;
+            var ok3 = a3.indexOf('> 10') !== -1 || a3.indexOf('>10') !== -1 || a3.indexOf('mayor que 10') !== -1 || a3.indexOf('>') !== -1;
+            return ok1 && ok2 && ok3;
+        }
+
+        function markDone(){
+            sessionStorage.setItem('module' + moduleNum + 'Done','true');
+            var msg=document.getElementById('quiz-msg'); msg.textContent='¡Correcto! Módulo completado.'; msg.style.display='block';
+            if(nextLink){ nextLink.classList.remove('disabled'); nextLink.removeEventListener('click', blockNextLink); }
+            if(window.updateModuleLinks) window.updateModuleLinks();
+        }
+
+        function blockNextLink(e){
+            e.preventDefault();
+            alert('Debes completar este módulo antes de continuar.');
+        }
+
+        document.addEventListener('click', function(ev){ if(ev.target && ev.target.id === 'submit-quiz'){ if(checkAnswers()){ markDone(); } else { var msg=document.getElementById('quiz-msg'); msg.textContent='Respuestas incorrectas. Intenta de nuevo.'; msg.style.display='block'; } } });
+
+        if(sessionStorage.getItem('module' + moduleNum + 'Done') === 'true'){ var msg=document.getElementById('quiz-msg'); if(msg){ msg.textContent='Módulo completado previamente.'; msg.style.display='block'; } if(nextLink) nextLink.classList.remove('disabled'); } else { if(nextLink){ nextLink.addEventListener('click', blockNextLink); nextLink.classList.add('disabled'); } }
+    })();
+    </script>
 </body>
 </html>

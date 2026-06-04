@@ -132,12 +132,74 @@
         </div>
 
         <div style="text-align: center; margin-top: 2rem;">
-            <a href="modulo-01.html" class="btn btn-primary">¡Comenzar el Curso! →</a>
+            <a id="start-course" href="modulo-01.html" class="btn btn-primary">¡Comenzar el Curso! →</a>
         </div>
     </main>
 
     <footer>
         <p>Curso de C# para Principiantes | Creado con ❤️ para aprender programación</p>
     </footer>
+</footer>
+    <script>
+    (function(){
+        var securityCode = 'ACCESO2026'; // código por defecto (ajustable)
+
+        function init(){
+            // interceptar botón iniciar
+            var start = document.getElementById('start-course');
+            if(start){
+                start.addEventListener('click', function(e){
+                    if(sessionStorage.getItem('courseUnlocked') === 'true') return; // ya desbloqueado
+                    e.preventDefault();
+                    var code = prompt('Ingresa el código de seguridad para comenzar el curso:');
+                    if(code === securityCode){
+                        sessionStorage.setItem('courseUnlocked','true');
+                        updateModuleLinks();
+                        window.location.href = start.getAttribute('href');
+                    } else {
+                        alert('Código incorrecto. No puedes iniciar el curso.');
+                    }
+                });
+            }
+
+            updateModuleLinks();
+        }
+
+        function updateModuleLinks(){
+            var anchors = document.querySelectorAll('.module-card a[href^="modulo-"]');
+            anchors.forEach(function(a){
+                var href = a.getAttribute('href');
+                var m = href.match(/modulo-(\d+)\.html/);
+                if(!m) return;
+                var num = parseInt(m[1],10);
+
+                // reset state and listeners
+                a.classList.add('disabled');
+                a.removeEventListener('click', allowNav);
+                a.removeEventListener('click', blockedNav);
+                a.onclick = null;
+
+                // only allow if course unlocked and previous module done (or it's module 1)
+                var courseUnlocked = sessionStorage.getItem('courseUnlocked') === 'true';
+                var prevDone = num === 1 ? courseUnlocked : sessionStorage.getItem('module' + (num-1) + 'Done') === 'true';
+                if(prevDone){
+                    a.classList.remove('disabled');
+                    a.addEventListener('click', allowNav);
+                } else {
+                    a.addEventListener('click', blockedNav);
+                }
+            });
+        }
+
+        function allowNav(e){ /* no-op placeholder for possible future behavior */ }
+        function blockedNav(e){
+            e.preventDefault();
+            alert('Debes completar los módulos previos para desbloquear este módulo.');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+        window.updateModuleLinks = updateModuleLinks; // exposer para módulos
+    })();
+    </script>
 </body>
 </html>

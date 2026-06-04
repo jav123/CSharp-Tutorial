@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo 6: Colecciones | Curso de C#</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+    (function(){
+        if(sessionStorage.getItem('module5Done') !== 'true'){
+            alert('Debes completar el Módulo 5 antes de acceder a este módulo.');
+            window.location.href = 'modulo-05.html';
+        }
+    })();
+    </script>
 </head>
 <body>
     <header>
@@ -233,12 +241,50 @@ List<<span class="keyword">int</span>> numeros = <span class="keyword">new</span
 
         <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
             <a href="modulo-05.html" class="btn btn-secondary">← Anterior: POO</a>
-            <a href="modulo-07.html" class="btn btn-primary">Siguiente: Excepciones →</a>
+            <a id="next-link" href="modulo-07.html" class="btn btn-primary">Siguiente: Excepciones →</a>
         </div>
     </main>
 
     <footer>
         <p>Curso de C# para Principiantes | Módulo 6: Colecciones</p>
     </footer>
+    <script>
+    (function(){
+        var moduleNum = 6;
+        var nextLink = document.getElementById('next-link');
+        var main = document.querySelector('main');
+        var container = document.createElement('div');
+        container.className = 'container';
+        container.id = 'module-quiz';
+        container.innerHTML = '\n            <h2>📝 Quiz del Módulo 6</h2>\n            <p>Contesta las 3 preguntas correctamente para continuar.</p>\n            <ol>\n              <li>¿Cómo declaras un array de enteros?</li>\n              <li>¿Qué método agrega un elemento a una List&lt;T&gt;?</li>\n              <li>¿Qué estructura guarda pares clave-valor?</li>\n            </ol>\n            <input id="q1" placeholder="Respuesta 1" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">\n            <input id="q2" placeholder="Respuesta 2" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">\n            <input id="q3" placeholder="Respuesta 3" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">\n            <div style="margin-top:0.5rem;"><button id="submit-quiz" class="btn btn-primary">Enviar respuestas</button></div>\n            <p id="quiz-msg" style="display:none; margin-top:0.5rem;"></p>\n        ';
+        if(main){ main.insertBefore(container, main.querySelector('div[style*="display: flex"]')); }
+
+        function checkAnswers(){
+            var a1 = (document.getElementById('q1')||{value:''}).value.toLowerCase();
+            var a2 = (document.getElementById('q2')||{value:''}).value.toLowerCase();
+            var a3 = (document.getElementById('q3')||{value:''}).value.toLowerCase();
+            var ok1 = a1.indexOf('int[]') !== -1 || a1.indexOf('int array') !== -1 || a1.indexOf('new int') !== -1;
+            var ok2 = a2.indexOf('add(') !== -1 || a2.indexOf('add') !== -1;
+            var ok3 = a3.indexOf('dictionary') !== -1 || a3.indexOf('clave') !== -1 || a3.indexOf('key') !== -1;
+            return ok1 && ok2 && ok3;
+        }
+
+        function markDone(){
+            sessionStorage.setItem('module' + moduleNum + 'Done','true');
+            var msg=document.getElementById('quiz-msg'); msg.textContent='¡Correcto! Módulo completado.'; msg.style.display='block';
+            if(nextLink){ nextLink.classList.remove('disabled'); nextLink.removeEventListener('click', blockNextLink); }
+            if(window.updateModuleLinks) window.updateModuleLinks();
+        }
+
+        function blockNextLink(e){
+            e.preventDefault();
+            alert('Debes completar este módulo antes de continuar.');
+        }
+
+        document.addEventListener('click', function(ev){ if(ev.target && ev.target.id === 'submit-quiz'){ if(checkAnswers()){ markDone(); } else { var msg=document.getElementById('quiz-msg'); msg.textContent='Respuestas incorrectas. Intenta de nuevo.'; msg.style.display='block'; } } });
+
+        if(sessionStorage.getItem('module' + moduleNum + 'Done') === 'true'){ var msg=document.getElementById('quiz-msg'); if(msg){ msg.textContent='Módulo completado previamente.'; msg.style.display='block'; } if(nextLink) nextLink.classList.remove('disabled'); } else { if(nextLink){ nextLink.addEventListener('click', blockNextLink); nextLink.classList.add('disabled'); } }
+    })();
+    </script>
 </body>
 </html>

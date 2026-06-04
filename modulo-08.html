@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo 8: Ejercicios Prácticos | Curso de C#</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+    (function(){
+        if(sessionStorage.getItem('module7Done') !== 'true'){
+            alert('Debes completar el Módulo 7 antes de acceder a este módulo.');
+            window.location.href = 'modulo-07.html';
+        }
+    })();
+    </script>
 </head>
 <body>
     <header>
@@ -281,6 +289,52 @@
             <a href="modulo-07.html" class="btn btn-secondary">← Anterior: Excepciones</a>
             <a href="index.html" class="btn btn-primary">Volver al Inicio</a>
         </div>
+        
+        <!-- Quiz del módulo 8 -->
+        <div class="container" id="module-quiz">
+            <h2>📝 Quiz del Módulo 8</h2>
+            <p>Responde las 3 preguntas correctamente para marcar el módulo como completado.</p>
+            <ol>
+                <li>¿Qué comando crea un proyecto de consola con dotnet?</li>
+                <li>¿Qué método usamos para leer texto desde la consola?</li>
+                <li>¿Qué método convierte una cadena a entero (ej: "123" -> 123)?</li>
+            </ol>
+            <input id="q1" placeholder="Respuesta 1" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">
+            <input id="q2" placeholder="Respuesta 2" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">
+            <input id="q3" placeholder="Respuesta 3" style="display:block; margin:0.25rem 0; padding:0.5rem; max-width:420px;">
+            <div style="margin-top:0.5rem;"><button id="submit-quiz" class="btn btn-primary">Enviar respuestas</button></div>
+            <p id="quiz-msg" style="display:none; margin-top:0.5rem;"></p>
+        </div>
+
+        <script>
+        (function(){
+            var moduleNum = 8;
+            function checkAnswers(){
+                var a1 = (document.getElementById('q1')||{value:''}).value.toLowerCase();
+                var a2 = (document.getElementById('q2')||{value:''}).value.toLowerCase();
+                var a3 = (document.getElementById('q3')||{value:''}).value.toLowerCase();
+                var ok1 = a1.indexOf('dotnet new console') !== -1 || a1.indexOf('new console') !== -1;
+                var ok2 = a2.indexOf('console.readline') !== -1 || a2.indexOf('readline') !== -1;
+                var ok3 = a3.indexOf('int.parse') !== -1 || a3.indexOf('tryparse') !== -1 || a3.indexOf('int.tryparse') !== -1;
+                return ok1 && ok2 && ok3;
+            }
+
+            document.addEventListener('click', function(ev){
+                if(ev.target && ev.target.id === 'submit-quiz'){
+                    var msg = document.getElementById('quiz-msg');
+                    if(checkAnswers()){
+                        sessionStorage.setItem('module8Done','true');
+                        msg.textContent = '¡Correcto! Módulo marcado como completado.';
+                        msg.style.display = 'block';
+                        if(window.updateModuleLinks) window.updateModuleLinks();
+                    } else {
+                        msg.textContent = 'Al menos una respuesta es incorrecta. Intenta de nuevo.';
+                        msg.style.display = 'block';
+                    }
+                }
+            });
+        })();
+        </script>
     </main>
 
     <footer>

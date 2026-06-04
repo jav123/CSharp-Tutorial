@@ -1044,3 +1044,40 @@ footer a:hover {
         word-wrap: break-word;
     }
 }
+
+/* ============================================
+   STATES: Disabled / Locked Modules
+   ============================================ */
+
+/* Visual for disabled links and buttons */
+.disabled, a.disabled, .btn.disabled {
+    pointer-events: none !important;
+    opacity: 0.6 !important;
+    filter: grayscale(30%);
+    cursor: not-allowed !important;
+}
+
+/* For nav links specifically */
+nav a.disabled {
+    color: var(--gray-400);
+    background: transparent;
+    box-shadow: none;
+}
+
+/* For module cards when locked */
+.module-card.locked {
+    opacity: 0.7;
+    filter: grayscale(20%);
+}
+
+/* Small badge to indicate locked state */
+.lock-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+    color: var(--gray-600);
+    margin-left: 0.5rem;
+}
+
